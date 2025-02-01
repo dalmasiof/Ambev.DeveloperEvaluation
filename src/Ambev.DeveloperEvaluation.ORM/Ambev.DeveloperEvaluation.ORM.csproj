@@ -18,4 +18,7 @@
 		<ProjectReference Include="..\..\..\Ambev.DeveloperEvaluation.Domain.Sales\Ambev.DeveloperEvaluation.Domain.Sales.csproj" />
 		<ProjectReference Include="..\Ambev.DeveloperEvaluation.Domain\Ambev.DeveloperEvaluation.Domain.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="MigrationsSales\" />
+	</ItemGroup>
 </Project>
