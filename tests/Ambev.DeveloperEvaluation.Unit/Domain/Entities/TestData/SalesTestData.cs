@@ -38,7 +38,7 @@ namespace Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData
         }
 
         private static readonly Faker<Sale> SaleFaker = new Faker<Sale>()
-       .RuleFor(u => u.Branch, f => f.PickRandom("Branch_1", "Branch_1"))
+       .RuleFor(u => u.Branch, f => f.PickRandom("Branch_1", "Branch_2"))
        .RuleFor(u => u.CustomerId, new Guid())
        .RuleFor(u => u.CustomerName, f => f.Internet.UserName())
        .RuleFor(u => u.Items, SaleItemFaker.GenerateBetween(1, 20))

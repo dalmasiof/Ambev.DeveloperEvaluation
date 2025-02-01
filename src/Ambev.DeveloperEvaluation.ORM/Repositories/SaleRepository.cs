@@ -15,8 +15,17 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
         }
         public async Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default)
         {
-            await _context.AddAsync(sale, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _context.Sales.AddAsync(sale, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
             return sale;
         }
@@ -31,7 +40,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories
 
         public async Task<Sale> GetSale(Guid saleId, CancellationToken cancellationToken = default)
         {
-            return await _context.Sales.FirstOrDefaultAsync(x => x.Id == saleId);
+            return await _context.Sales.FirstOrDefaultAsync(x => x.Id == saleId, cancellationToken);
         }
 
         public async Task<IEnumerable<Sale>> GetSalesByUserId(Guid userId, CancellationToken cancellationToken = default)

@@ -21,4 +21,4 @@
         public decimal TotalAmount => (UnitPrice * Quantity);
     }
 }
-}
+

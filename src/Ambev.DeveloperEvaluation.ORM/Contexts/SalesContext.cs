@@ -20,16 +20,16 @@ namespace Ambev.DeveloperEvaluation.ORM.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-        public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
+        public class YourDbContextFactory : IDesignTimeDbContextFactory<SalesContext>
         {
-            public DefaultContext CreateDbContext(string[] args)
+            public SalesContext CreateDbContext(string[] args)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                var builder = new DbContextOptionsBuilder<DefaultContext>();
+                var builder = new DbContextOptionsBuilder<SalesContext>();
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
                 builder.UseNpgsql(
@@ -37,7 +37,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Contexts
                        b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.WebApi")
                 );
 
-                return new DefaultContext(builder.Options);
+                return new SalesContext(builder.Options);
             }
         }
     }

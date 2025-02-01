@@ -2,18 +2,19 @@ using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Unit.Domain;
 using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
+using Ambev.DeveloperEvaluation.Unit.Application.Sales.TestData;
+using Ambev.DeveloperEvaluation.Unit.Application.Users.TestData;
 
-namespace Ambev.DeveloperEvaluation.Unit.Application;
+namespace Ambev.DeveloperEvaluation.Unit.Application.Users;
 
 /// <summary>
 /// Contains unit tests for the <see cref="CreateUserHandler"/> class.
 /// </summary>
-public class CreateUserHandlerTests
+public class CreateSaleHandlerTests
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -21,10 +22,10 @@ public class CreateUserHandlerTests
     private readonly CreateUserHandler _handler;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CreateUserHandlerTests"/> class.
+    /// Initializes a new instance of the <see cref="CreateSaleHandlerTests"/> class.
     /// Sets up the test dependencies and creates fake data generators.
     /// </summary>
-    public CreateUserHandlerTests()
+    public CreateSaleHandlerTests()
     {
         _userRepository = Substitute.For<IUserRepository>();
         _mapper = Substitute.For<IMapper>();
@@ -39,7 +40,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_ReturnsSuccessResponse()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var command = CreateUsersHandlerTestData.GenerateValidCommand();
         var user = new User
         {
             Id = Guid.NewGuid(),
@@ -96,7 +97,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_HashesPassword()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var command = CreateUsersHandlerTestData.GenerateValidCommand();
         var originalPassword = command.Password;
         const string hashedPassword = "h@shedPassw0rd";
         var user = new User
@@ -132,7 +133,7 @@ public class CreateUserHandlerTests
     public async Task Handle_ValidRequest_MapsCommandToUser()
     {
         // Given
-        var command = CreateUserHandlerTestData.GenerateValidCommand();
+        var command = CreateUsersHandlerTestData.GenerateValidCommand();
         var user = new User
         {
             Id = Guid.NewGuid(),

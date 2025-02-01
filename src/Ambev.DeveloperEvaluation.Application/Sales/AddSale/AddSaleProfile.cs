@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ambev.DeveloperEvaluation.Domain.Sales.Entities;
+using AutoMapper;
+using static Ambev.DeveloperEvaluation.Application.Sales.AddSale.AddSaleCommand;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.AddSale
 {
-    internal class AddSaleProfile
+    public class AddSaleProfile : Profile
     {
+        public AddSaleProfile()
+        {
+            CreateMap<AddSaleCommand, Sale>();
+            CreateMap<AddSaleItemCommand, SaleItem>();
+
+            CreateMap<Sale, AddSaleResult>();
+            CreateMap<SaleItem, AddSaleItemCommand>();
+        }
+    
     }
 }
