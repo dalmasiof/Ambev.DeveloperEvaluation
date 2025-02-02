@@ -1,5 +1,4 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Sales;
-using Ambev.DeveloperEvaluation.Domain.Sales.Entities;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.AddSale

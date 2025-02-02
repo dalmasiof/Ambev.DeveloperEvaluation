@@ -1,4 +1,5 @@
 using Ambev.DeveloperEvaluation.Application;
+using Ambev.DeveloperEvaluation.Application.Sales.AddSale;
 using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
@@ -29,25 +30,32 @@ public class Program
             builder.AddBasicHealthChecks();
             builder.Services.AddSwaggerGen();
 
+            //builder.Services.AddDbContext<DefaultContext>(options =>
+            //    options.UseNpgsql(
+            //        builder.Configuration.GetConnectionString("DefaultConnection"),
+            //        b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
+            //    )
+            //);
+
+            //builder.Services.AddDbContext<SalesContext>(options =>
+            //    options.UseNpgsql(
+            //        builder.Configuration.GetConnectionString("DefaultConnection"),
+            //        b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
+            //    )
+            //);
+
             builder.Services.AddDbContext<DefaultContext>(options =>
-                options.UseNpgsql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
-                )
-            );
+              options.UseInMemoryDatabase("DeveloperEvaluation"));
 
             builder.Services.AddDbContext<SalesContext>(options =>
-                options.UseNpgsql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly("Ambev.DeveloperEvaluation.ORM")
-                )
-            );
+             options.UseInMemoryDatabase("DeveloperEvaluation"));
 
             builder.Services.AddJwtAuthentication(builder.Configuration);
 
             builder.RegisterDependencies();
 
-            builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);
+            builder.Services.AddAutoMapper(typeof(Program)
+                .Assembly, typeof(ApplicationLayer).Assembly);
 
             builder.Services.AddMediatR(cfg =>
             {
@@ -56,6 +64,7 @@ public class Program
                     typeof(Program).Assembly
                 );
             });
+            builder.Services.AddTransient<IRequestHandler<AddSaleCommand, AddSaleResult>, AddSaleHandler>();
 
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 

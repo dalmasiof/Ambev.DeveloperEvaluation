@@ -3,6 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Sales.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using System.Reflection;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.AddSale
 {
@@ -17,6 +18,11 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.AddSale
         }
         public async Task<AddSaleResult> Handle(AddSaleCommand command, CancellationToken cancellationToken)
         {
+            var handlerAssembly = Assembly.GetExecutingAssembly();
+
+            // Logando ou verificando o nome do assembly
+            Console.WriteLine($"Handler Assembly: {handlerAssembly.FullName}");
+
             var addsaleValidator = new AddSaleValidator();
             var validationResult = await addsaleValidator.ValidateAsync(command, cancellationToken);
 
@@ -32,6 +38,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.AddSale
             var createdSale = await saleRepository.CreateAsync(sale, cancellationToken);
 
             var result = mapper.Map<AddSaleResult>(createdSale);
+
             return result;
         }
     }
