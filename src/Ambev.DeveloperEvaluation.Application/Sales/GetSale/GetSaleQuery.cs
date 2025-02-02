@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale
 {
-    internal class GetSaleQuery
+    public class GetSaleQuery : IRequest<GetSaleResult>
     {
+        public Guid Id { get; set; }
+        public GetSaleQuery(Guid guid)
+        {
+            this.Id = guid;
+        }
+        public GetSaleQuery()
+        {
+            
+        }
     }
 }

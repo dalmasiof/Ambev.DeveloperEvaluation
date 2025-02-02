@@ -4,10 +4,10 @@
     {
         public Guid Id { get; set; }
         public string SaleNumber { get; set; }
-        public DateTime SaleDate { get; set; } = DateTime.UtcNow;
+        public DateTime SaleDate { get; set; }
         public Guid CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public decimal TotalAmount => Items.Sum(i => i.TotalAmount);
+        public decimal TotalAmount { get; set; }
         public string Branch { get; set; }
         public List<SaleItemResult> Items { get; set; }
     }
@@ -18,7 +18,7 @@
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-        public decimal TotalAmount => (UnitPrice * Quantity);
+        public decimal TotalAmount { get; set; }
     }
 }
 

@@ -64,8 +64,7 @@ public class Program
                     typeof(Program).Assembly
                 );
             });
-            builder.Services.AddTransient<IRequestHandler<AddSaleCommand, AddSaleResult>, AddSaleHandler>();
-
+            
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             var app = builder.Build();

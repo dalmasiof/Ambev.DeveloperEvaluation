@@ -3,8 +3,9 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Sales.AddSale;
 using AutoMapper;
 using static Ambev.DeveloperEvaluation.Application.Sales.AddSale.AddSaleCommand;
 using static Ambev.DeveloperEvaluation.WebApi.Features.Sales.AddSale.AddSaleRequest;
+using Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.AddSale;
 
 /// <summary>
 /// Profile for mapping between Application and API CreateUser responses

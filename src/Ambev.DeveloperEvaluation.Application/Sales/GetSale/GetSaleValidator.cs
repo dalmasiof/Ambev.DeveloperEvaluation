@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ambev.DeveloperEvaluation.Domain.Sales;
+using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale
 {
-    internal class GetSaleValidator
+    public class GetSaleValidator : AbstractValidator<GetSaleQuery>
     {
+
+        public GetSaleValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage(ValidatorMessages.GUID_NOT_NULL);
+        }
     }
 }

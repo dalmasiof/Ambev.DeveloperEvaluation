@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ambev.DeveloperEvaluation.Domain.Sales.Entities;
+using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale
 {
-    internal class GetSaleProfile
+    public class GetSaleProfile : Profile
     {
+        public GetSaleProfile()
+        {
+            CreateMap<Guid, GetSaleQuery>()
+                .ConstructUsing(id => new GetSaleQuery(id));
+
+            CreateMap<Sale, GetSaleResult>();
+        }
+
     }
 }
